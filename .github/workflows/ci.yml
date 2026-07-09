@@ -1,0 +1,30 @@
+name: Test Environment
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: 1. Checkout Code
+        uses: actions/checkout@v5
+ 
+      - name: 2. Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '22'
+   
+      - name: 3. Grant execute permission
+        working-directory: gradleproject
+        run: chmod +x gradlew
+ 
+     
+      - name: 4. Run Tests
+        working-directory: gradleproject
+        run: ./gradlew test --tests "com.example.Selenium.data.OrdersDataIT"
+ 
