@@ -35,7 +35,7 @@ jobs:
 
       - name: Run tests
         working-directory: gradleproject
-        run: ./gradlew clean test --tests "com.example.Selenium.data.OrdersDataIT"
+        run: ./gradlew clean W6D3DataBuilderStructureTest OrdersDataIT W6D4ReportingInsightsTest
 
       - name: Upload Allure results
         if: always()
