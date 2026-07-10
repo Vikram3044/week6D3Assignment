@@ -31,8 +31,7 @@ jobs:
 
       - name: Prepare Allure results
         run: |
-          rm -rf gradleproject/target/allure-results gradleproject/build/allure-results allure-report
-          mkdir -p allure-history
+          rm -rf gradleproject/target/allure-results gradleproject/build/allure-results allure-report allure-history
 
       - name: Run tests
         working-directory: gradleproject
@@ -63,6 +62,15 @@ jobs:
           name: allure-report
           path: allure-report
           if-no-files-found: warn
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+          publish_branch: gh-pages
+          force_orphan: true
 
       - name: Report link
         if: always()
