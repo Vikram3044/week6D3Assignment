@@ -59,7 +59,7 @@ public class OrdersDataIT {
     void countsOnlyThisTestsOrders(){
         factory.persisted(anOrder());
         factory.persisted(anOrder().withSku("SHU-RET-202").withQuantity(2));
-        assertEquals(1,repository.count());
+        assertEquals(2,repository.count());
     }
     @Test
     void resetMakesTestOrderIndependent(){
