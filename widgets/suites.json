@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"36c336accd9e3d2ccc22cd3e3a223a05","name":"com.example.Selenium.data.OrdersDataIT","statistic":{"failed":0,"broken":0,"skipped":0,"passed":4,"unknown":0,"total":4}}]}
+{"total":1,"items":[{"uid":"36c336accd9e3d2ccc22cd3e3a223a05","name":"com.example.Selenium.data.OrdersDataIT","statistic":{"failed":1,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":4}}]}
