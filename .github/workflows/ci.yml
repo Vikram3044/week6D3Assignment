@@ -29,9 +29,13 @@ jobs:
         working-directory: gradleproject
         run: chmod +x gradlew
 
+      - name: Prepare Allure results
+        run: |
+          rm -rf gradleproject/target/allure-results gradleproject/build/allure-results allure-report allure-history
+
       - name: Run tests
         working-directory: gradleproject
-        run: ./gradlew test --tests "com.example.Selenium.data.OrdersDataIT"
+        run: ./gradlew clean test --tests "com.example.Selenium.data.OrdersDataIT"
 
       - name: Upload Allure results
         if: always()
@@ -66,6 +70,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-report
           publish_branch: gh-pages
+          force_orphan: true
 
       - name: Report link
         if: always()
