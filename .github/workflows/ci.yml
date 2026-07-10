@@ -51,8 +51,14 @@ jobs:
         run: |
           mkdir -p allure-history
           cd allure-history
-          git clone --depth 1 --branch gh-pages --single-branch https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
+          git clone --depth 1 --branch gh-pages --single-branch https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git . || echo "First run - no previous history available"
           cd ..
+          # Extract history folder if it exists in the cloned content
+          if [ -d "allure-history/history" ]; then
+            echo "✅ Previous Allure history found - trends will be calculated"
+          else
+            echo "ℹ️ No previous history - trends will appear after next run"
+          fi
 
       - name: Generate and publish Allure report
         if: always()
