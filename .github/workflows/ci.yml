@@ -31,7 +31,7 @@ jobs:
 
       - name: Prepare Allure results
         run: |
-          rm -rf gradleproject/target/allure-results gradleproject/build/allure-results allure-report allure-history
+          rm -rf gradleproject/target/allure-results gradleproject/build/allure-results allure-report
 
       - name: Run tests
         working-directory: gradleproject
@@ -44,6 +44,15 @@ jobs:
           name: allure-results
           path: gradleproject/target/allure-results
           if-no-files-found: warn
+
+      - name: Fetch previous Allure history
+        if: always()
+        continue-on-error: true
+        run: |
+          mkdir -p allure-history
+          cd allure-history
+          git clone --depth 1 --branch gh-pages --single-branch https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
+          cd ..
 
       - name: Generate and publish Allure report
         if: always()
@@ -70,7 +79,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-report
           publish_branch: gh-pages
-          force_orphan: true
 
       - name: Report link
         if: always()
