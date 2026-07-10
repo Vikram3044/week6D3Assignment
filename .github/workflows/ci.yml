@@ -41,7 +41,8 @@ jobs:
         run: |
           ./gradlew clean test \
           --tests "com.example.Selenium.data.W6D3TestDataBuilderStructureTest" \
-          --tests "com.example.Selenium.data.W6D4ReportingInsightsTest"
+          --tests "com.example.Selenium.data.W6D4ReportingInsightsTest" \
+          --tests "com.example.Selenium.data.OrdersDataIT" 
 
       - name: Verify Allure Results
         if: always()
